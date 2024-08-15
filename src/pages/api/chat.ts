@@ -1,5 +1,3 @@
-import { Configuration, OpenAIApi } from "openai";
-
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data = {
@@ -10,29 +8,22 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const apiKey = req.body.apiKey || process.env.OPEN_AI_KEY;
 
-  if (!apiKey) {
-    res
-      .status(400)
-      .json({ message: "The API key is incorrect or not set." });
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+  };
 
-    return;
-  }
-
-  const configuration = new Configuration({
-    apiKey: apiKey,
+  const { data } = await fetch("http://127.0.0.1:11434/api/chat", {
+    headers: headers,
+    method: "POST",
+    body: JSON.stringify({
+      model: "llama3:latest",
+      messages: req.body.messages,
+    }),
   });
 
-  const openai = new OpenAIApi(configuration);
-
-  const { data } = await openai.createChatCompletion({
-    model: "llama3:latest",
-    messages: req.body.messages,
-  });
-
-  const [aiRes] = data.choices;
-  const message = aiRes.message?.content || "An error has occurred";
+  const [aiRes] = data.message;
+  const message = data.message?.content || "An error has occurred";
 
   res.status(200).json({ message: message });
 }

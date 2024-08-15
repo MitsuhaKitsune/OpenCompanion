@@ -1,7 +1,7 @@
 import { buildUrl } from "@/utils/buildUrl";
 import Head from "next/head";
 export const Meta = () => {
-  const title = "ChatVRM";
+  const title = "OpenCompanion";
   const description =
     "You can enjoy conversations with 3D characters using a microphone, text input, and voice synthesis all in one web browser. You can also change the character (VRM), set its personality, and adjust its voice.";
   const imageUrl = "https://pixiv.github.io/ChatVRM/ogp.png";

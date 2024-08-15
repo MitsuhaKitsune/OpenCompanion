@@ -10,7 +10,7 @@ import { speakCharacter } from "@/features/messages/speakCharacter";
 import { MessageInputContainer } from "@/components/messageInputContainer";
 import { SYSTEM_PROMPT } from "@/features/constants/systemPromptConstants";
 import { KoeiroParam, DEFAULT_PARAM } from "@/features/constants/koeiroParam";
-import { getChatResponseStream } from "@/features/chat/openAiChat";
+import { getChatResponseStream } from "@/features/chat/ollamaChat";
 import { Introduction } from "@/components/introduction";
 import { Menu } from "@/components/menu";
 import { GitHubLink } from "@/components/githubLink";
@@ -77,11 +77,6 @@ export default function Home() {
    */
   const handleSendChat = useCallback(
     async (text: string) => {
-      if (!openAiKey) {
-        setAssistantMessage("API key not entered");
-        return;
-      }
-
       const newMessage = text;
 
       if (newMessage == null) return;
@@ -103,7 +98,7 @@ export default function Home() {
         ...messageLog,
       ];
 
-      const stream = await getChatResponseStream(messages, openAiKey).catch(
+      const stream = await getChatResponseStream(messages).catch(
         (e) => {
           console.error(e);
           return null;
@@ -128,6 +123,7 @@ export default function Home() {
 
           // 返答内容のタグ部分の検出
           const tagMatch = receivedMessage.match(/^\[(.*?)\]/);
+
           if (tagMatch && tagMatch[0]) {
             tag = tagMatch[0];
             receivedMessage = receivedMessage.slice(tag.length);
@@ -135,8 +131,9 @@ export default function Home() {
 
           // 返答を一文単位で切り出して処理する
           const sentenceMatch = receivedMessage.match(
-            /^(.+[。．！？\n]|.{10,}[、,])/
+            /[^\.\!\?]*[\.\!\?]/
           );
+
           if (sentenceMatch && sentenceMatch[0]) {
             const sentence = sentenceMatch[0];
             sentences.push(sentence);
@@ -155,11 +152,13 @@ export default function Home() {
             }
 
             const aiText = `${tag} ${sentence}`;
+
             const aiTalks = textsToScreenplay([aiText], koeiroParam);
             aiTextLog += aiText;
 
             // 文ごとに音声を生成 & 再生、返答を表示
             const currentAssistantMessage = sentences.join(" ");
+
             handleSpeakAi(aiTalks[0], () => {
               setAssistantMessage(currentAssistantMessage);
             });
