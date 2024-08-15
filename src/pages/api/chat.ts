@@ -15,7 +15,7 @@ export default async function handler(
   if (!apiKey) {
     res
       .status(400)
-      .json({ message: "APIキーが間違っているか、設定されていません。" });
+      .json({ message: "The API key is incorrect or not set." });
 
     return;
   }
@@ -27,12 +27,12 @@ export default async function handler(
   const openai = new OpenAIApi(configuration);
 
   const { data } = await openai.createChatCompletion({
-    model: "gpt-3.5-turbo",
+    model: "llama3:latest",
     messages: req.body.messages,
   });
 
   const [aiRes] = data.choices;
-  const message = aiRes.message?.content || "エラーが発生しました";
+  const message = aiRes.message?.content || "An error has occurred";
 
   res.status(200).json({ message: message });
 }

@@ -34,30 +34,30 @@ export const Introduction = ({
       <div className="mx-auto my-auto max-w-3xl max-h-full p-24 overflow-auto bg-white rounded-16">
         <div className="my-24">
           <div className="my-8 font-bold typography-20 text-secondary ">
-            このアプリケーションについて
+            About this application
           </div>
           <div>
-            Webブラウザだけで3Dキャラクターとの会話を、マイクやテキスト入力、音声合成を用いて楽しめます。キャラクター（VRM）の変更や性格設定、音声調整もできます。
+            You can enjoy conversations with 3D characters using a microphone, text input, and voice synthesis all in one web browser. You can also change the character (VRM), set its personality, and adjust its voice.
           </div>
         </div>
         <div className="my-24">
           <div className="my-8 font-bold typography-20 text-secondary">
-            技術紹介
+            Technology Introduction
           </div>
           <div>
-            3Dモデルの表示や操作には
+            To view and manipulate 3D models,
             <Link
               url={"https://github.com/pixiv/three-vrm"}
               label={"@pixiv/three-vrm"}
             />
-            、 会話文生成には
+            、 Conversation generation
             <Link
               url={
                 "https://openai.com/blog/introducing-chatgpt-and-whisper-apis"
               }
               label={"ChatGPT API"}
             />
-            、 音声合成には
+            、 For speech synthesis
             <Link url={"https://koemotion.rinna.co.jp/"} label={"Koemotion"} />
             の
             <Link
@@ -66,17 +66,17 @@ export const Introduction = ({
               }
               label={"Koeiromap API"}
             />
-            を使用しています。 詳細はこちらの
+            We use the following. For details, see here
             <Link
               url={"https://inside.pixiv.blog/2023/04/28/160000"}
               label={"技術解説記事"}
             />
-            をご覧ください。
+            Please see.
           </div>
           <div className="my-16">
-            このデモはGitHubでソースコードを公開しています。自由に変更や改変をお試しください！
+            The source code for this demo is available on GitHub. Feel free to modify and adapt it!
             <br />
-            リポジトリ：
+            Repository:
             <Link
               url={"https://github.com/pixiv/ChatVRM"}
               label={"https://github.com/pixiv/ChatVRM"}
@@ -86,16 +86,16 @@ export const Introduction = ({
 
         <div className="my-24">
           <div className="my-8 font-bold typography-20 text-secondary">
-            利用上の注意
+            Usage notes
           </div>
           <div>
-            差別的または暴力的な発言、特定の人物を貶めるような発言を、意図的に誘導しないでください。また、VRMモデルを使ってキャラクターを差し替える際はモデルの利用条件に従ってください。
+            Please do not intentionally induce discriminatory or violent comments, or comments that denigrate specific individuals. Also, when using a VRM model to replace a character, please follow the model's terms of use.
           </div>
         </div>
 
         <div className="my-24">
           <div className="my-8 font-bold typography-20 text-secondary">
-            Koeiromap APIキー
+            Koeiromap API key
           </div>
           <input
             type="text"
@@ -105,7 +105,7 @@ export const Introduction = ({
             className="my-4 px-16 py-8 w-full h-40 bg-surface3 hover:bg-surface3-hover rounded-4 text-ellipsis"
           ></input>
           <div>
-            APIキーはrinna Developersから発行してください。
+            Please issue an API key from rinna Developers.
             <Link
               url="https://developers.rinna.co.jp/product/#product=koeiromap-free"
               label="詳細はこちら"
@@ -114,7 +114,7 @@ export const Introduction = ({
         </div>
         <div className="my-24">
           <div className="my-8 font-bold typography-20 text-secondary">
-            OpenAI APIキー
+            OpenAI API key
           </div>
           <input
             type="text"
@@ -129,13 +129,13 @@ export const Introduction = ({
               url="https://platform.openai.com/account/api-keys"
               label="OpenAIのサイト"
             />
-            で取得できます。取得したAPIキーをフォームに入力してください。
+            You can get it by entering the API key in the form.
           </div>
           <div className="my-16">
             ChatGPT
-            APIはブラウザから直接アクセスしています。また、APIキーや会話内容はピクシブのサーバには保存されません。
+            The API is accessed directly from your browser. In addition, API keys and conversation content are not stored on Pixiv's servers.
             <br />
-            ※利用しているモデルはChatGPT API (GPT-3.5)です。
+            *The model used is ChatGPT API (GPT-3.5).
           </div>
         </div>
         <div className="my-24">
@@ -145,7 +145,7 @@ export const Introduction = ({
             }}
             className="font-bold bg-secondary hover:bg-secondary-hover active:bg-secondary-press disabled:bg-secondary-disabled text-white px-24 py-8 rounded-oval"
           >
-            APIキーを入力してはじめる
+            Enter your API key to get started
           </button>
         </div>
       </div>
